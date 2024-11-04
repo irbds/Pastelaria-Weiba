@@ -21,12 +21,40 @@ let pedidos = {};
 let aguardandoEntrega = {};
 let aguardandoPagamento = false;
 
+//menu principal
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
     pedidos[chatId] = [];
     aguardandoEntrega[chatId] = false; 
-    bot.sendMessage(chatId, "Bem-vindo à Pastelaria! Digite /cardapio para ver o nosso menu.");
+    bot.sendMessage(chatId, 
+        "Bem-vindo à Pastelaria! Digite:"
+        + "\n/cardapio para ver o nosso menu." 
+        + "\n/redes para acessar nossas redes sociais",
+        { parse_mode: 'Markdown' }
+    );
 });
+//fim menu principal
+
+//inicio do fluxo de redes sociais
+bot.onText(/\/redes/, (msg) => {
+    const chatId = msg.chat.id;
+    let mensagem = "Aqui estão nossas redes sociais:\n /instagram\n /facebook";
+
+    bot.sendMessage(chatId, mensagem);
+});
+
+bot.onText(/\/instagram/, (msg) => {
+    const chatId = msg.chat.id;
+    let mensagem = "https://www.instagram.com/";
+    bot.sendMessage(chatId, mensagem, { parse_mode: 'Markdown' });
+});
+
+bot.onText(/\/facebook/, (msg) => {
+    const chatId = msg.chat.id;
+    let mensagem = "https://www.facebook.com";
+    bot.sendMessage(chatId, mensagem, { parse_mode: 'Markdown' });
+});
+//fim do fluxo de redes sociais
 
 bot.onText(/\/cardapio/, (msg) => {
     const chatId = msg.chat.id;
